@@ -10,30 +10,20 @@ jobs:
   code-lint:
     runs-on: ubuntu-latest
     steps:
-      - name: code checkout
-        uses: actions/checkout@v4
-        
-      - name: Set up Node.js
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Change to your Node.js version
+          node-version: 'lts/*'
+          cache: 'npm' # Automatically caches node_modules dependencies
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        #working-directory: ./frontend
-        run: npm set strict-ssl false
-        
-      #- name: Install Linter
-        #run: npm install eslint --save-dev
-        
-      - name: Build
-        #working-directory: frontend
-        run: npm run build
+      - name: Install Dependencies
+        run: npm ci
 
-      # Step 4: Run ESLint
       - name: Run ESLint
-        #working-directory: frontend
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        run: npx eslint .
           
   build-and-push-code:
     needs: [code-lint]
