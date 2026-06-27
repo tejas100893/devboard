@@ -21,7 +21,7 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         #working-directory: ./frontend
-        run: npm ci --force
+        run: npm set strict-ssl false
         
       #- name: Install Linter
         #run: npm install eslint --save-dev
