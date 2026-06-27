@@ -21,10 +21,10 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         #working-directory: ./frontend
-        run: npm install
+        run: npm ci
         
-      - name: Install Linter
-        run: npm install eslint --save-dev
+      #- name: Install Linter
+        #run: npm install eslint --save-dev
         
       - name: Build
         #working-directory: frontend
