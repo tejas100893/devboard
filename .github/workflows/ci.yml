@@ -14,21 +14,17 @@ jobs:
         uses: actions/checkout@v7
         
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 12
+          node-version: '20' # Change to your Node.js version
 
-      # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
-        working-directory: ./frontend/src
+      # Step 3: Install dependencies
+      - name: Install dependencies
         run: npm ci
-        
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
-          prettier: true
+      # Step 4: Run ESLint
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
           
   build-and-push-code:
     needs: [code-lint]
